@@ -224,36 +224,6 @@
 
 <iframe id="mapFrame" src="https://adrianaarellano.github.io/comp_all_index_2022/"></iframe>
 
-<script>
-  function switchTopLevel(level, name, icon) {
-    // Update breadcrumb
-    document.getElementById('breadcrumb-path').innerHTML = `<a href="#" onclick="resetBreadcrumb()">EfDI</a> > ${name}`;
-
-    // Update iframe source
-    const mapFrame = document.getElementById('mapFrame');
-    mapFrame.classList.add('fade-out');
-    setTimeout(() => {
-      mapFrame.src = `https://adrianaarellano.github.io/comp_all_index_2022/`;
-      mapFrame.classList.remove('fade-out');
-      mapFrame.classList.add('fade-in');
-    }, 500);
-
-    // Update persistent label
-    const efdiLabel = document.getElementById('efdiLabel');
-    efdiLabel.textContent = `${icon} ${name}`; // Add icon and name
-  }
-
-  function resetBreadcrumb() {
-    document.getElementById('breadcrumb-path').innerHTML = `<a href="#" onclick="resetBreadcrumb()">EfDI</a> > Overall`;
-    const efdiLabel = document.getElementById('efdiLabel');
-    efdiLabel.textContent = ''; // Clear persistent label
-  }
-
-  function updateYear(year) {
-    const years = ['2020', '2021', '2022'];
-    document.getElementById('selectedYear').innerText = years[year];
-  }
-</script>
   <script>
     let currentYear = "2022";
     let breadcrumbPath = "EfDI > Overall"; // Default breadcrumb
