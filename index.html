@@ -861,21 +861,36 @@
           tracking_practice_all_group: `${baseURL}comp_track_prac_group_${currentYear}/`,
           tracking_practice_group: `${baseURL}comp_track_prac_group_${currentYear}/`,
           tracking_practice_equality_group: `${baseURL}comp_track_prac_group_${currentYear}/`
-        };
+       };
 
-        mapFrame.src = mapURLs[mapID] || mapURLs['efdi_all'];
+      if (!mapURLs[mapID]) {
+        console.error(`Map URL not found for ID: ${mapID}`);
+        mapFrame.src = mapURLs['efdi_all']; // Fallback to default
+      } else {
+        mapFrame.src = mapURLs[mapID];
+      }
 
-        breadcrumb.innerHTML = `<a href="#" onclick="resetBreadcrumb()">EfDI</a> > ${breadcrumbPath}`;
+      updateBreadcrumb(breadcrumbPath);
 
-        mapFrame.classList.remove("fade-out");
-        mapFrame.classList.add("fade-in");
-      }, 500);
-    }
+      mapFrame.classList.remove('fade-out');
+      mapFrame.classList.add('fade-in');
+    }, 500);
+  }
 
-    function resetBreadcrumb() {
-      breadcrumbPath = "EfDI > Overall";
-      switchTab('efdi_all', 'Overall');
-    }
+  // Function to reset the breadcrumb and persistent label
+  function resetBreadcrumb() {
+    breadcrumbPath = "EfDI > Overall";
+    updateBreadcrumb(breadcrumbPath);
+    updatePersistentLabel('🏠', 'Overall');
+    switchTab('efdi_all', 'EfDI > Overall');
+  }
+
+  // Function to update the year
+  function updateYear(index) {
+    currentYear = years[index];
+    document.getElementById('selectedYear').textContent = currentYear;
+    switchTab(currentTab);
+  }
 
     // Initialize the dropdowns with the default selection
     updateCurriculumDropdown();
