@@ -62,9 +62,6 @@
       text-align: left;
       color: #2c3e50;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px; /* Space between icon and text */
     }
 
     .indent-1 {
@@ -135,16 +132,13 @@
     .persistent-label {
       display: inline-block;
       margin-left: 10px;
-      padding: 4px 8px;
+      padding: 6px 12px;
       border-radius: 4px;
-      font-size: 0.9em;
+      font-size: 1em;
+      font-weight: bold;
       background-color: #1abc9c;
       color: white;
-    }
-
-    /* Icons for EfDI options */
-    .icon {
-      font-size: 1.2em;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -153,26 +147,14 @@
 <div class="tabs" id="navigationBar">
   <div class="tab">
     EfDI
-    <span id="efdiLabel" class="persistent-label"></span> <!-- Persistent label -->
+    <span id="efdiLabel" class="persistent-label" aria-live="polite"></span> <!-- Accessible persistent label -->
     <div class="dropdown-menu">
-      <div class="dropdown-item" onclick="switchTopLevel('efdi_all', 'Overall', '🏠')">
-        <span class="icon">🏠</span> Overall
-      </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system', '🌿')">
-        <span class="icon">🌿</span> Non-system
-      </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy', '📜')">
-        <span class="icon">📜</span> Policy
-      </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice', '🛠️')">
-        <span class="icon">🛠️</span> Practice
-      </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels', '📊')">
-        <span class="icon">📊</span> Levels
-      </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality', '⚖️')">
-        <span class="icon">⚖️</span> Equality
-      </div>
+      <div class="dropdown-item" onclick="switchTopLevel('efdi_all', 'Overall')">Overall</div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system')">Non-system</div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy')">Policy</div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice')">Practice</div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels')">Levels</div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality')">Equality</div>
     </div>
   </div>
   
@@ -224,15 +206,15 @@
 
 <iframe id="mapFrame" src="https://adrianaarellano.github.io/comp_all_index_2022/"></iframe>
 
-  <script>
-    let currentYear = "2022";
-    let breadcrumbPath = "EfDI > Overall"; // Default breadcrumb
-    let currentTab = "efdi_all"; // Default tab
-    let topLevelSelection = "efdi_all"; // Track top-level selection
-    const baseURL = "https://adrianaarellano.github.io/";
-    const years = ["2009", "2016", "2022"];
+<script>
+  let currentYear = "2022";
+  let breadcrumbPath = "EfDI > Overall"; // Default breadcrumb
+  let currentTab = "efdi_all"; // Default tab
+  let topLevelSelection = "efdi_all"; // Track top-level selection
+  const baseURL = "https://adrianaarellano.github.io/";
+  const years = ["2009", "2016", "2022"];
 
-    const curriculumOptions = {
+  const curriculumOptions = {
       efdi_all: [
         { id: "cur_all", label: "Area", breadcrumb: "Overall > Curriculum" },
         { id: "cur_policy_all", label: "Policy", breadcrumb: "Overall > Curriculum > Policy" },
@@ -653,38 +635,62 @@
         dropdown.appendChild(item);
       });
     }
-    
-    
-    function updateYear(index) {
-      currentYear = years[index];
-      document.getElementById("selectedYear").textContent = currentYear;
-      switchTab(currentTab); 
-    }
 
-    function switchTopLevel(selection, newBreadcrumbPath) {
-      topLevelSelection = selection;
-      switchTab(selection, newBreadcrumbPath);
-      updateCurriculumDropdown();
-      updatePedagogyDropdown(); // Add this line
-      updateEthosDropdown();
-      updateTrainingDropdown();
-      updateAutonomyDropdown();
-      updateCeDropdown();
-      updateTrackingDropdown();
-    }
+  // Function to update the breadcrumb trail
+  function updateBreadcrumb(path) {
+    const breadcrumb = document.getElementById('breadcrumb-path');
+    const parts = path.split(' > ');
+    breadcrumb.innerHTML = parts
+      .map((part, index) => {
+        if (index === 0) {
+          return `<a href="#" onclick="resetBreadcrumb()">${part}</a>`;
+        } else {
+          return `<a href="#" onclick="switchTab('${parts[index - 1].toLowerCase()}', '${parts.slice(0, index + 1).join(' > ')}')">${part}</a>`;
+        }
+      })
+      .join(' > ');
+  }
 
-    function switchTab(mapID, newBreadcrumbPath = '') {
-      const mapFrame = document.getElementById("mapFrame");
-      const breadcrumb = document.getElementById("breadcrumb-path");
-      currentTab = mapID;
+  // Function to switch the top-level selection
+  function switchTopLevel(selection, name) {
+    topLevelSelection = selection;
+    updateBreadcrumb(`EfDI > ${name}`);
+    updatePersistentLabel(name);
+    updateDropdowns();
+    switchTab(selection, `EfDI > ${name}`);
+  }
 
-      breadcrumbPath = newBreadcrumbPath || breadcrumbPath;
+  // Function to update the persistent label
+  function updatePersistentLabel(name) {
+    const efdiLabel = document.getElementById('efdiLabel');
+    efdiLabel.textContent = name;
+    efdiLabel.setAttribute('aria-label', `Selected: ${name}`); // Accessible label
+  }
 
-      mapFrame.classList.add("fade-out");
+  // Function to update all dropdowns
+  function updateDropdowns() {
+    updateCurriculumDropdown();
+    updatePedagogyDropdown();
+    updateEthosDropdown();
+    updateTrainingDropdown();
+    updateAutonomyDropdown();
+    updateCeDropdown();
+    updateTrackingDropdown();
+  }
 
-      setTimeout(function () {
-        const mapURLs = {
-          efdi_all: `${baseURL}comp_all_index_${currentYear}/`,
+  // Function to switch tabs and update the iframe
+  function switchTab(mapID, newBreadcrumbPath = '') {
+    const mapFrame = document.getElementById('mapFrame');
+    const breadcrumb = document.getElementById('breadcrumb-path');
+    currentTab = mapID;
+
+    breadcrumbPath = newBreadcrumbPath || breadcrumbPath;
+
+    mapFrame.classList.add('fade-out');
+
+    setTimeout(() => {
+      const mapURLs = {
+        efdi_all: `${baseURL}comp_all_index_${currentYear}/`,
           efdi_non_system: `${baseURL}comp_non_index_${currentYear}/`,
           efdi_policy: `${baseURL}comp_policy_index_${currentYear}/`,
           efdi_practice: `${baseURL}comp_prac_index_${currentYear}/`,
@@ -861,7 +867,7 @@
           tracking_practice_all_group: `${baseURL}comp_track_prac_group_${currentYear}/`,
           tracking_practice_group: `${baseURL}comp_track_prac_group_${currentYear}/`,
           tracking_practice_equality_group: `${baseURL}comp_track_prac_group_${currentYear}/`
-       };
+      };
 
       if (!mapURLs[mapID]) {
         console.error(`Map URL not found for ID: ${mapID}`);
@@ -881,7 +887,7 @@
   function resetBreadcrumb() {
     breadcrumbPath = "EfDI > Overall";
     updateBreadcrumb(breadcrumbPath);
-    updatePersistentLabel('🏠', 'Overall');
+    updatePersistentLabel('Overall');
     switchTab('efdi_all', 'EfDI > Overall');
   }
 
@@ -892,14 +898,9 @@
     switchTab(currentTab);
   }
 
-    // Initialize the dropdowns with the default selection
-    updateCurriculumDropdown();
-    updatePedagogyDropdown();
-    updateEthosDropdown();
-    updateTrainingDropdown();
-    updateAutonomyDropdown();
-    updateCeDropdown();
-    updateTrackingDropdown();
-  </script>
+  // Initialize the dropdowns with the default selection
+  updateDropdowns();
+</script>
+
 </body>
 </html>
