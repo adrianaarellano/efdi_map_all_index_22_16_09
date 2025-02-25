@@ -62,6 +62,9 @@
       text-align: left;
       color: #2c3e50;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px; /* Space between icon and text */
     }
 
     .indent-1 {
@@ -128,25 +131,20 @@
       opacity: 1;
     }
 
-    /* Additional styles for EfDI options */
-    .efdi-non-system {
-      background-color: green !important;
+    /* Persistent label styling */
+    .persistent-label {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      background-color: #1abc9c;
+      color: white;
     }
 
-    .efdi-policy {
-      background-color: orange !important;
-    }
-
-    .efdi-practice {
-      background-color: blue !important;
-    }
-
-    .efdi-levels {
-      background-color: purple !important;
-    }
-
-    .efdi-equality {
-      background-color: red !important;
+    /* Icons for EfDI options */
+    .icon {
+      font-size: 1.2em;
     }
   </style>
 </head>
@@ -155,13 +153,26 @@
 <div class="tabs" id="navigationBar">
   <div class="tab">
     EfDI
+    <span id="efdiLabel" class="persistent-label"></span> <!-- Persistent label -->
     <div class="dropdown-menu">
-      <div class="dropdown-item" onclick="switchTopLevel('efdi_all', 'Overall')">Overall</div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system')">Non-system</div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy')">Policy</div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice')">Practice</div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels')">Levels</div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality')">Equality</div>
+      <div class="dropdown-item" onclick="switchTopLevel('efdi_all', 'Overall', '🏠')">
+        <span class="icon">🏠</span> Overall
+      </div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system', '🌿')">
+        <span class="icon">🌿</span> Non-system
+      </div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy', '📜')">
+        <span class="icon">📜</span> Policy
+      </div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice', '🛠️')">
+        <span class="icon">🛠️</span> Practice
+      </div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels', '📊')">
+        <span class="icon">📊</span> Levels
+      </div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality', '⚖️')">
+        <span class="icon">⚖️</span> Equality
+      </div>
     </div>
   </div>
   
@@ -214,7 +225,7 @@
 <iframe id="mapFrame" src="https://adrianaarellano.github.io/comp_all_index_2022/"></iframe>
 
 <script>
-  function switchTopLevel(level, name) {
+  function switchTopLevel(level, name, icon) {
     // Update breadcrumb
     document.getElementById('breadcrumb-path').innerHTML = `<a href="#" onclick="resetBreadcrumb()">EfDI</a> > ${name}`;
 
@@ -227,34 +238,26 @@
       mapFrame.classList.add('fade-in');
     }, 500);
 
-    // Change navigation bar color based on the selected option
-    const navigationBar = document.getElementById('navigationBar');
-    navigationBar.className = 'tabs'; // Reset classes
-    if (level === 'efdi_non_system') {
-      navigationBar.classList.add('efdi-non-system');
-    } else if (level === 'efdi_policy') {
-      navigationBar.classList.add('efdi-policy');
-    } else if (level === 'efdi_practice') {
-      navigationBar.classList.add('efdi-practice');
-    } else if (level === 'efdi_levels') {
-      navigationBar.classList.add('efdi-levels');
-    } else if (level === 'efdi_equality') {
-      navigationBar.classList.add('efdi-equality');
-    }
+    // Update persistent label
+    const efdiLabel = document.getElementById('efdiLabel');
+    efdiLabel.textContent = `${icon} ${name}`; // Add icon and name
   }
 
   function resetBreadcrumb() {
     document.getElementById('breadcrumb-path').innerHTML = `<a href="#" onclick="resetBreadcrumb()">EfDI</a> > Overall`;
-    const navigationBar = document.getElementById('navigationBar');
-    navigationBar.className = 'tabs'; // Reset classes
+    const efdiLabel = document.getElementById('efdiLabel');
+    efdiLabel.textContent = ''; // Clear persistent label
   }
 
   function updateYear(year) {
     const years = ['2020', '2021', '2022'];
     document.getElementById('selectedYear').innerText = years[year];
   }
-  
-  </script>
+</script>
+
+</body>
+</html>
+
   <script>
     let currentYear = "2022";
     let breadcrumbPath = "EfDI > Overall"; // Default breadcrumb
