@@ -75,6 +75,10 @@
     .dropdown-item:hover {
       background-color: #f1f1f1;
     }
+    
+    .highlight-tab {
+      background-color: #1abc9c; /* Highlight color */
+    }
 
     #breadcrumbs {
       padding: 10px;
@@ -653,6 +657,8 @@
 
   // Function to switch the top-level selection
   function switchTopLevel(selection, name) {
+    const efdiTab = document.querySelector('.tab'); // Select the EfDI tab
+    efdiTab.classList.add('highlight-tab'); // Add highlight class
     topLevelSelection = selection;
     updateBreadcrumb(`EfDI > ${name}`);
     updatePersistentLabel(name);
