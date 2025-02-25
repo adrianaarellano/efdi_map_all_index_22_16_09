@@ -155,23 +155,17 @@
     EfDI
     <span id="efdiLabel" class="persistent-label"></span> <!-- Persistent label -->
     <div class="dropdown-menu">
-      <div class="dropdown-item" onclick="switchTopLevel('efdi_all', 'Overall', '🏠')">
-        <span class="icon">🏠</span> Overall
+      <div class="dropdown-item" onclick="switchTopLevel('efdi_all', 'Overall')">
       </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system', '🌿')">
-        <span class="icon">🌿</span> Non-system
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system')">
       </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy', '📜')">
-        <span class="icon">📜</span> Policy
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy')">
       </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice', '🛠️')">
-        <span class="icon">🛠️</span> Practice
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice')">
       </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels', '📊')">
-        <span class="icon">📊</span> Levels
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels')">
       </div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality', '⚖️')">
-        <span class="icon">⚖️</span> Equality
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality')">
       </div>
     </div>
   </div>
@@ -881,7 +875,7 @@
   function resetBreadcrumb() {
     breadcrumbPath = "EfDI > Overall";
     updateBreadcrumb(breadcrumbPath);
-    updatePersistentLabel('🏠', 'Overall');
+    updatePersistentLabel('Overall');
     switchTab('efdi_all', 'EfDI > Overall');
   }
 
