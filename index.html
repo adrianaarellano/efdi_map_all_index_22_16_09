@@ -157,7 +157,7 @@
       <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_non_system', 'Non-system')">Non-system</div>
       <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_policy', 'Policy')">Policy</div>
       <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_practice', 'Practice')">Practice</div>
-      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Levels')">Levels</div>
+      <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_levels', 'Performance')">Performance</div>
       <div class="dropdown-item indent-1" onclick="switchTopLevel('efdi_equality', 'Equality')">Equality</div>
     </div>
   </div>
@@ -251,13 +251,13 @@
         { id: "cur_practice_out_act", label: "Outside Activities", breadcrumb: "Practice > Curriculum > Outside Activities" }
       ],
       efdi_levels: [
-        { id: "cur_levels", label: "Area", breadcrumb: "Levels > Curriculum" },
-        { id: "cur_policy_levels", label: "Policy", breadcrumb: "Levels > Curriculum > Policy" },
-        { id: "cur_policy_levels_aim", label: "Aim", breadcrumb: "Levels > Curriculum > Policy > Aim" },
-        { id: "cur_policy_levels_topic", label: "Topic", breadcrumb: "Levels > Curriculum > Policy > Topic" },
-        { id: "cur_policy_levels_mandate", label: "CE Mandate", breadcrumb: "Levels > Curriculum > Policy > CE Mandate" },
-        { id: "cur_practice_levels", label: "Practice", breadcrumb: "Levels > Curriculum > Practice" },
-        { id: "cur_practice_levels_out_act", label: "Outside Activities", breadcrumb: "Levels > Curriculum > Practice > Outside Activities" }
+        { id: "cur_levels", label: "Area", breadcrumb: "Performance > Curriculum" },
+        { id: "cur_policy_levels", label: "Policy", breadcrumb: "Performance > Curriculum > Policy" },
+        { id: "cur_policy_levels_aim", label: "Aim", breadcrumb: "Performance > Curriculum > Policy > Aim" },
+        { id: "cur_policy_levels_topic", label: "Topic", breadcrumb: "Performance > Curriculum > Policy > Topic" },
+        { id: "cur_policy_levels_mandate", label: "CE Mandate", breadcrumb: "Performance > Curriculum > Policy > CE Mandate" },
+        { id: "cur_practice_levels", label: "Practice", breadcrumb: "Performance > Curriculum > Practice" },
+        { id: "cur_practice_levels_out_act", label: "Outside Activities", breadcrumb: "Performance > Curriculum > Practice > Outside Activities" }
       ],
       efdi_equality: [
         { id: "cur_equality", label: "Area", breadcrumb: "Equality > Curriculum" },
@@ -325,15 +325,15 @@
         { id: "pedagogy_practice_class", label: "Classroom Activities", breadcrumb: "Practice > Pedagogy > Open classroom activities" }
       ],
       efdi_levels: [
-        { id: "pedagogy_levels", label: "Area", breadcrumb: "Levels > Pedagogy" },
-        { id: "pedagogy_policy_levels", label: "Policy", breadcrumb: "Levels > Pedagogy > Policy" },
-        { id: "pedagogy_policy_levels_guide", label: "Guidelines", breadcrumb: "Levels > Pedagogy > Policy > Guidelines" },
-        { id: "pedagogy_policy_levels_object", label: "Objectives", breadcrumb: "Levels > Pedagogy > Policy > Objectives" },
-        { id: "pedagogy_practice_levels", label: "Practice", breadcrumb: "Levels > Pedagogy > Practice" },
-        { id: "pedagogy_practice_levels_vote", label: "Student Vote", breadcrumb: "Levels > Pedagogy > Practice > Student Vote" },
-        { id: "pedagogy_practice_levels_act_prac", label: "Active Participation", breadcrumb: "Levels > Pedagogy > Practice > Active Participation" },
-        { id: "pedagogy_practice_levels_dis", label: "Open Discussion", breadcrumb: "Levels > Pedagogy > Practice > Open Discussion" },
-        { id: "pedagogy_practice_levels_class", label: "Classroom Activities", breadcrumb: "Levels > Pedagogy > Practice > Open classroom activities" }
+        { id: "pedagogy_levels", label: "Area", breadcrumb: "Performance > Pedagogy" },
+        { id: "pedagogy_policy_levels", label: "Policy", breadcrumb: "Performance > Pedagogy > Policy" },
+        { id: "pedagogy_policy_levels_guide", label: "Guidelines", breadcrumb: "Performance > Pedagogy > Policy > Guidelines" },
+        { id: "pedagogy_policy_levels_object", label: "Objectives", breadcrumb: "Performance > Pedagogy > Policy > Objectives" },
+        { id: "pedagogy_practice_levels", label: "Practice", breadcrumb: "Performance > Pedagogy > Practice" },
+        { id: "pedagogy_practice_levels_vote", label: "Student Vote", breadcrumb: "Performance > Pedagogy > Practice > Student Vote" },
+        { id: "pedagogy_practice_levels_act_prac", label: "Active Participation", breadcrumb: "Performance > Pedagogy > Practice > Active Participation" },
+        { id: "pedagogy_practice_levels_dis", label: "Open Discussion", breadcrumb: "Performance > Pedagogy > Practice > Open Discussion" },
+        { id: "pedagogy_practice_levels_class", label: "Classroom Activities", breadcrumb: "Performance > Pedagogy > Practice > Open classroom activities" }
       ],
       efdi_equality: [
         { id: "pedagogy_equality", label: "Area", breadcrumb: "Equality > Pedagogy" },
@@ -387,10 +387,10 @@
       efdi_practice: [
       ],
       efdi_levels: [
-        { id: "train_levels", label: "Area", breadcrumb: "Levels > Training" },
-        { id: "train_policy_levels", label: "Policy", breadcrumb: "Levels > Training > Policy" },
-        { id: "train_policy_levels_in_service", label: "In-service", breadcrumb: "Levels > Training > Policy > In-service" },
-        { id: "train_policy_levels_mandatory", label: "Mandatory", breadcrumb: "Levels > Training > Policy > Mandatory" }
+        { id: "train_levels", label: "Area", breadcrumb: "Performance > Training" },
+        { id: "train_policy_levels", label: "Policy", breadcrumb: "Performance > Training > Policy" },
+        { id: "train_policy_levels_in_service", label: "In-service", breadcrumb: "Performance > Training > Policy > In-service" },
+        { id: "train_policy_levels_mandatory", label: "Mandatory", breadcrumb: "Performance > Training > Policy > Mandatory" }
       ],
       efdi_equality: [
       ]
@@ -444,12 +444,12 @@
         { id: "ethos_practice_teacher", label: "Teacher Involvement", breadcrumb: "Practice > Ethos > Teacher Involvement" }
       ],
       efdi_levels: [
-        { id: "ethos_levels", label: "Area", breadcrumb: "Levels > Ethos" },
-        { id: "ethos_policy_levels", label: "Policy", breadcrumb: "Levels > Ethos > Policy" },
-        { id: "ethos_policy_levels_guide", label: "Guidelines", breadcrumb: "Levels > Ethos > Policy > Guidelines" },
-        { id: "ethos_practice_levels", label: "Practice", breadcrumb: "Levels > Ethos > Practice" },
-        { id: "ethos_practice_levels_student", label: "Student Involvement", breadcrumb: "Levels > Ethos > Practice > Student Involvement" },
-        { id: "ethos_practice_levels_teacher", label: "Teacher Involvement", breadcrumb: "Levels > Ethos > Practice > Teacher Involvement" }
+        { id: "ethos_levels", label: "Area", breadcrumb: "Performance > Ethos" },
+        { id: "ethos_policy_levels", label: "Policy", breadcrumb: "Performance > Ethos > Policy" },
+        { id: "ethos_policy_levels_guide", label: "Guidelines", breadcrumb: "Performance > Ethos > Policy > Guidelines" },
+        { id: "ethos_practice_levels", label: "Practice", breadcrumb: "Performance > Ethos > Practice" },
+        { id: "ethos_practice_levels_student", label: "Student Involvement", breadcrumb: "Performance > Ethos > Practice > Student Involvement" },
+        { id: "ethos_practice_levels_teacher", label: "Teacher Involvement", breadcrumb: "Performance > Ethos > Practice > Teacher Involvement" }
       ],
       efdi_equality: [
       ]
@@ -553,9 +553,9 @@
       efdi_practice: [
       ],
       efdi_levels: [
-        { id: "ce_levels", label: "Area", breadcrumb: "Levels > Compulsory education" },
-        { id: "ce_policy_levels", label: "Policy", breadcrumb: "Levels > Compulsory education > Policy" },
-        { id: "ce_policy_levels_years", label: "Compulsory years", breadcrumb: "Levels > Compulsory education > Policy > Length of compulsory education" }
+        { id: "ce_levels", label: "Area", breadcrumb: "Performance > Compulsory education" },
+        { id: "ce_policy_levels", label: "Policy", breadcrumb: "Performance > Compulsory education > Policy" },
+        { id: "ce_policy_levels_years", label: "Compulsory years", breadcrumb: "Performance > Compulsory education > Policy > Length of compulsory education" }
       ],
       efdi_equality: [
         { id: "ce_equality", label: "Area", breadcrumb: "Equality > Compulsory education" },
